@@ -1,5 +1,32 @@
-﻿const Favorites = () => {
+﻿import { useContext } from "react"
+import MovieCard from "../components/MovieCard"
+import { MovieContext } from "../contexts/MovieContext"
+
+
+
+
+
+const Favorites = () => {
+  const { favorite } = useContext(MovieContext)
+
+  if (favorite && favorite.length > 0) {
+    return (
+      <div className="mx-auto max-w-4xl py-3 text-center sm:py-16">
+        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-red-400">Your personal collection</p>
+        <h1 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-5xl py-7">Favorites</h1>
+
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-5 lg:grid-cols-4">
+          {favorite.map((movie) => <MovieCard movie={movie} key={movie.id} />)}
+        </div>
+      </div>
+    )
+  }
+
+
+
+
   return (
+
     <section className="mx-auto max-w-4xl py-8 text-center sm:py-16">
       <p className="text-xs font-semibold uppercase tracking-[0.25em] text-red-400">Your personal collection</p>
       <h1 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-5xl">Favorites</h1>
@@ -12,5 +39,7 @@
     </section>
   )
 }
+
+
 
 export default Favorites
